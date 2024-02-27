@@ -6,9 +6,9 @@ export const router = createRouter({
     routes: [
         { path: '/', component: () => import("@/views/Wallet.vue") },
         { path: "/login", component: () => import("@/views/auth/Login.vue") },
-        // { path: "register", component: () => import("../views/auth/Register.vue") },
-        // { path: "exchange", component: () => import("../views/auth/Exchange.vue") },
-        // { path: "transactions", component: () => import("../views/auth/Transactions.vue") },
+        { path: "/register", component: () => import("@/views/auth/Register.vue") },
+        // { path: "/exchange", component: () => import("../views/auth/Exchange.vue") },
+        // { path: "/transactions", component: () => import("../views/auth/Transactions.vue") },
         // catch all redirect to home page
         { path: '/:pathMatch(.*)*', redirect: '/' }
     ]

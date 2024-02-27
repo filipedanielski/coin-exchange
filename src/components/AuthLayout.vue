@@ -142,7 +142,7 @@ async function logout() {
         </div>
       </div>
       <!-- Page content here -->
-      Content
+      <slot></slot>
     </div>
     <div class="drawer-side">
       <label

@@ -1,13 +1,8 @@
 <script setup>
 import axios from "@/helpers/axios";
 import { ref } from "vue";
-import Layout from "@/components/Layout.vue";
+import Layout from "@/components/AuthLayout.vue";
 
-// axios.get("http://localhost/api/user").then((response) => {
-//   // user is authenticated
-//   console.log("success");
-//   console.log(response); // should output user details.
-// });
 </script>
 
-<template><Layout/></template>
+<template><Layout> Carteira </Layout></template>

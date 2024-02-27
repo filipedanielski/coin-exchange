@@ -83,8 +83,8 @@ async function login() {
           </div>
           <div class="mt-2 form-control">
             <label class="label">
-              <a href="#" class="label-text-alt link link-hover"
-                >Não tem uma conta? Clique aqui para se registrar.</a
+              <router-link to="/register" class="label-text-alt link link-hover"
+                >Não tem uma conta? Clique aqui para se registrar.</router-link
               >
             </label>
           </div>
