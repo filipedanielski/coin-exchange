@@ -63,7 +63,7 @@ async function logout() {
           <span>Coin Exchange</span>
         </div>
         <div class="flex-none">
-          <ul class="px-1 menu menu-horizontal">
+          <ul class="px-1 space-x-2 menu menu-horizontal">
             <li class="hidden lg:block">
               <label class="swap swap-rotate">
                 <input
@@ -72,7 +72,7 @@ async function logout() {
                   value="winter"
                 />
                 <svg
-                  class="w-6 h-6 fill-current swap-on"
+                  class="w-5 h-5 fill-current swap-on"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -81,7 +81,7 @@ async function logout() {
                   />
                 </svg>
                 <svg
-                  class="w-6 h-6 fill-current swap-off"
+                  class="w-5 h-5 fill-current swap-off"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -168,7 +168,7 @@ async function logout() {
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <ul class="min-h-full p-4 menu w-80 bg-base-200">
+      <ul class="min-h-full p-4 space-y-2 menu w-80 bg-base-200">
         <!-- Sidebar content here -->
         <li>
           <router-link to="/">
