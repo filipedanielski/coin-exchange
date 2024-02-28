@@ -9,7 +9,7 @@ async function logout() {
   try {
     await axios.post("/logout");
     emit("logout");
-    router.push("/login");
+    router.push({ name: "login" });
   } catch (err) {
     console.log("failure");
     console.log(err);
@@ -60,7 +60,7 @@ async function logout() {
               d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <span>Coin Exchange</span>
+          <router-link :to="{ name: 'wallet' }">Coin Exchange</router-link>
         </div>
         <div class="flex-none">
           <ul class="px-1 space-x-2 menu menu-horizontal">
@@ -92,7 +92,7 @@ async function logout() {
               </label>
             </li>
             <li class="hidden lg:block">
-              <router-link to="/">
+              <router-link :to="{ name: 'wallet' }">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -111,7 +111,7 @@ async function logout() {
               </router-link>
             </li>
             <li class="hidden lg:block">
-              <router-link to="/exchange">
+              <router-link :to="{ name: 'exchange' }">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -130,7 +130,7 @@ async function logout() {
               </router-link>
             </li>
             <li class="hidden lg:block">
-              <router-link to="/transactions">
+              <router-link :to="{ name: 'transactions' }">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -171,7 +171,7 @@ async function logout() {
       <ul class="min-h-full p-4 space-y-2 menu w-80 bg-base-200">
         <!-- Sidebar content here -->
         <li>
-          <router-link to="/">
+          <router-link :to="{ name: 'wallet' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -190,7 +190,7 @@ async function logout() {
           </router-link>
         </li>
         <li>
-          <router-link to="/exchange">
+          <router-link :to="{ name: 'exchange' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -209,7 +209,7 @@ async function logout() {
           </router-link>
         </li>
         <li>
-          <router-link to="/transactions">
+          <router-link :to="{ name: 'transactions' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

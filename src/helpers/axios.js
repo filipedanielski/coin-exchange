@@ -26,12 +26,12 @@ axios.interceptors.response.use(null, (err) => {
       error.validation[field] = err.response.data.errors[field][0];
     }
   } else {
-    error.message = "Something went wrong. Please try again later.";
+    error.message = err.response.data.error;
   }
 
   if ([401, 419].includes(err.response?.status)) {
     // redirect to login
-    router.push("/login");
+    router.push({ name: 'login' });
   }
 
   return Promise.reject(error);

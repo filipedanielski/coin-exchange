@@ -15,7 +15,7 @@ async function register() {
     await axios.get("/sanctum/csrf-cookie");
     await axios.post("/register", form.value);
     emit("login");
-    router.push("/");
+    router.push({ name: "wallet" });
   } catch (err) {
     console.log("failure");
     console.log(err);
@@ -117,7 +117,7 @@ async function register() {
           </div>
           <div class="mt-2 form-control">
             <label class="label">
-              <router-link to="/login" class="label-text-alt link link-hover"
+              <router-link :to="{ name: 'login' }" class="label-text-alt link link-hover"
                 >Já tem uma conta? Clique aqui para se autenticar.</router-link
               >
             </label>
