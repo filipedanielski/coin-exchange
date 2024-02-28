@@ -2,19 +2,13 @@
 import axios from "@/helpers/axios";
 import { ref } from "vue";
 import { router } from "@/router";
-
-const user = ref({
-  name: null,
-});
-
-axios.get("http://localhost/api/user").then((response) => {
-  // user is authenticated
-  user.value.name = response.data.name;
-});
+const props = defineProps(["user"]);
+const emit = defineEmits(["logout"]);
 
 async function logout() {
   try {
     await axios.post("/logout");
+    emit("logout");
     router.push("/login");
   } catch (err) {
     console.log("failure");
@@ -98,7 +92,7 @@ async function logout() {
               </label>
             </li>
             <li class="hidden lg:block">
-              <a>
+              <router-link to="/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -114,10 +108,10 @@ async function logout() {
                   />
                 </svg>
                 <span>Carteira</span>
-              </a>
+              </router-link>
             </li>
             <li class="hidden lg:block">
-              <a>
+              <router-link to="/exchange">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -133,10 +127,10 @@ async function logout() {
                   />
                 </svg>
                 <span>Câmbio</span>
-              </a>
+              </router-link>
             </li>
             <li class="hidden lg:block">
-              <a>
+              <router-link to="/transactions">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -152,11 +146,11 @@ async function logout() {
                   />
                 </svg>
                 <span> Transações </span>
-              </a>
+              </router-link>
             </li>
             <li>
               <details>
-                <summary>Olá {{ user.name }}</summary>
+                <summary>Olá {{ user }}</summary>
                 <ul class="w-full p-2 rounded-t-none bg-base-300">
                   <li><a @click.prevent="logout">Logout</a></li>
                 </ul>
@@ -177,7 +171,7 @@ async function logout() {
       <ul class="min-h-full p-4 menu w-80 bg-base-200">
         <!-- Sidebar content here -->
         <li>
-          <a>
+          <router-link to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -193,10 +187,10 @@ async function logout() {
               />
             </svg>
             <span>Carteira</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="/exchange">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -212,10 +206,10 @@ async function logout() {
               />
             </svg>
             <span>Câmbio</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="/transactions">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -231,7 +225,7 @@ async function logout() {
               />
             </svg>
             <span> Transações </span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>

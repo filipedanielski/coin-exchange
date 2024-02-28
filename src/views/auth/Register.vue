@@ -2,6 +2,7 @@
 import axios from "@/helpers/axios";
 import { ref } from "vue";
 import { router } from "@/router";
+const emit = defineEmits(["login"]);
 
 const form = ref({
   name: null,
@@ -11,7 +12,9 @@ const form = ref({
 });
 async function register() {
   try {
+    await axios.get("/sanctum/csrf-cookie");
     await axios.post("/register", form.value);
+    emit("login");
     router.push("/");
   } catch (err) {
     console.log("failure");
