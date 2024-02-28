@@ -55,7 +55,7 @@ getWallets();
           <h3 class="pb-4 text-lg font-bold">
             Adicionar fundos à sua carteira
           </h3>
-          <CurrencyInput v-model="quantity" :options="{ currency: 'BRL' }" />
+          <CurrencyInput v-model="quantity" :options="{ currency: 'BRL', precision: 2 }" />
           <div class="py-4">
             <button class="btn btn-sm btn-success" @click.prevent="addFunds">
               Enviar

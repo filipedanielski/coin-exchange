@@ -15,7 +15,7 @@ getUser();
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen">
     <Nav v-if="user" :user="user" @logout="() => (user = '')">
       <router-view />
     </Nav>

@@ -20,7 +20,7 @@ getTransactions();
 </script>
 
 <template>
-  <div class="self-center w-2/3 mt-4 overflow-x-auto shadow">
+  <div class="self-center mt-4 overflow-x-auto rounded-lg shadow md:w-2/3">
     <table class="table table-zebra">
       <thead>
         <tr>
@@ -52,6 +52,7 @@ getTransactions();
         <tr v-for="(transaction, index) in transactions">
           <th>{{ index + 1 }}</th>
           <td class="text-error">
+            <span class="fi fi-br"></span>
             {{
               new Intl.NumberFormat("pt-BR", {
                 style: "currency",
@@ -59,7 +60,7 @@ getTransactions();
               }).format(transaction.quantity)
             }}
           </td>
-          <td class="text-error">
+          <td class="text-warning">
             {{
               new Intl.NumberFormat("pt-BR", {
                 style: "currency",
@@ -69,6 +70,7 @@ getTransactions();
           </td>
           <td class="text-primary">{{ transaction.rate }}</td>
           <td class="text-success">
+            <span class="fi" :class="`fi-${transaction.to_currency.country}`"></span>
             {{ transaction.bought }} {{ transaction.to_currency.code }}
           </td>
           <td>
