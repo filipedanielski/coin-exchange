@@ -2,7 +2,7 @@
 import axios from "@/helpers/axios";
 import { ref } from "vue";
 // import { router } from "@/router";
-import Layout from "@/components/AuthLayout.vue";
+import Nav from "@/components/Nav.vue";
 
 const user = ref("");
 
@@ -16,9 +16,9 @@ getUser();
 
 <template>
   <div>
-    <Layout v-if="user" :user="user" @logout="() => (user = '')">
+    <Nav v-if="user" :user="user" @logout="() => (user = '')">
       <router-view />
-    </Layout>
+    </Nav>
     <router-view @login="getUser" v-else />
   </div>
 </template>
