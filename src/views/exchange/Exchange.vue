@@ -196,15 +196,23 @@ getForeignCurrencies();
                   }}
                 </span>
               </div>
-              <div class="text-warning">
-                Taxa:
-                {{
+              <div class="text-error">
+                Taxa: - {{
                   new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   }).format(getFee().toFixed(2))
                 }}
                 (2%)
+              </div>
+              <div class="text-info">
+                A converter:
+                {{
+                  new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format((quantity - getFee()).toFixed(2))
+                }}
               </div>
             </div>
             <div>
