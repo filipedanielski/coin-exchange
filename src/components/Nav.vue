@@ -6,15 +6,9 @@ const props = defineProps(["user"]);
 const emit = defineEmits(["logout"]);
 
 async function logout() {
-  try {
-    await axios.post("/logout");
-    emit("logout");
-    router.push({ name: "login" });
-  } catch (err) {
-    console.log("failure");
-    console.log(err);
-    // error.value = err;
-  }
+  await axios.post("/logout");
+  emit("logout");
+  router.push({ name: "login" });
 }
 </script>
 

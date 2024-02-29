@@ -19,6 +19,6 @@ getUser();
     <Nav v-if="user" :user="user" @logout="() => (user = '')">
       <router-view />
     </Nav>
-    <router-view @login="getUser" v-else />
+    <router-view v-else @login="getUser" />
   </div>
 </template>

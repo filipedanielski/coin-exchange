@@ -2,22 +2,28 @@
 import axios from "@/helpers/axios";
 import { ref } from "vue";
 import { router } from "@/router";
+import { toast } from 'vue3-toastify';
 const emit = defineEmits(["login"]);
 
 const form = ref({
   email: null,
   password: null,
 });
+const validation = ref([]);
+
 async function login() {
   try {
     await axios.get("/sanctum/csrf-cookie");
-    await axios.post("/login", form.value);
+    const response = await axios.post("/login", form.value);
     emit("login");
+    toast("Usuário logado.");
     router.push({ name: "wallet" });
   } catch (err) {
-    console.log("failure");
-    console.log(err);
-    // error.value = err;
+    if (err.status === 422) {
+      validation.value = err.validation;
+    } else {
+      toast(err.message);
+    }
   }
 }
 </script>
@@ -64,6 +70,7 @@ async function login() {
               class="input input-bordered"
               required
             />
+            <div class="mt-2 text-xs text-error">{{ validation.email }}</div>
           </div>
           <div class="form-control">
             <label class="label">
@@ -79,6 +86,7 @@ async function login() {
               class="input input-bordered"
               required
             />
+            <div class="mt-2 text-xs text-error">{{ validation.password }}</div>
           </div>
           <div class="mt-6 form-control">
             <button class="btn btn-primary">Entrar</button>

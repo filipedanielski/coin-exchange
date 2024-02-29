@@ -2,6 +2,7 @@
 import axios from "@/helpers/axios";
 import { ref } from "vue";
 import { router } from "@/router";
+import { toast } from 'vue3-toastify';
 const emit = defineEmits(["login"]);
 
 const form = ref({
@@ -10,16 +11,21 @@ const form = ref({
   password: null,
   password_confirmation: null,
 });
+const validation = ref([]);
+
 async function register() {
   try {
     await axios.get("/sanctum/csrf-cookie");
-    await axios.post("/register", form.value);
+    const response = await axios.post("/register", form.value);
+    toast("Usuário registrado com sucesso.");
     emit("login");
     router.push({ name: "wallet" });
   } catch (err) {
-    console.log("failure");
-    console.log(err);
-    // error.value = err;
+    if (err.status === 422) {
+      validation.value = err.validation;
+    } else {
+      toast(err.message);
+    }
   }
 }
 </script>
@@ -66,6 +72,7 @@ async function register() {
               class="input input-bordered"
               required
             />
+            <div class="mt-2 text-xs text-error">{{ validation.name }}</div>
           </div>
           <div class="form-control">
             <label class="label">
@@ -81,6 +88,7 @@ async function register() {
               class="input input-bordered"
               required
             />
+            <div class="mt-2 text-xs text-error">{{ validation.email }}</div>
           </div>
           <div class="form-control">
             <label class="label">
@@ -96,6 +104,7 @@ async function register() {
               class="input input-bordered"
               required
             />
+            <div class="mt-2 text-xs text-error">{{ validation.password }}</div>
           </div>
           <div class="form-control">
             <label class="label">
@@ -112,6 +121,7 @@ async function register() {
               required
             />
           </div>
+          <div class="mt-2 text-xs text-error">{{ validation.password_confirmation }}</div>
           <div class="mt-6 form-control">
             <button class="btn btn-primary">Registrar</button>
           </div>

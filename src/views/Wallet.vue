@@ -3,6 +3,7 @@ import axios from "@/helpers/axios";
 import { ref } from "vue";
 import FundCard from "@/components/FundCard.vue";
 import CurrencyInput from "@/components/CurrencyInput.vue";
+import { toast } from 'vue3-toastify';
 
 const quantity = ref(0.0);
 const wallets = ref([]);
@@ -10,6 +11,7 @@ const fallback = ref({
   quantity: 0.0,
   currency: { code: "BRL", description: "Real Brasileiro", country: "br" },
 });
+const validation = ref([]);
 
 async function getWallets() {
   const response = await axios.get("http://localhost/api/wallet");
@@ -20,17 +22,18 @@ async function getWallets() {
 
 async function addFunds() {
   try {
-    await axios.post("http://localhost/api/wallet", {
+    validation.value = [];
+    const response = await axios.post("http://localhost/api/wallet", {
       quantity: quantity.value,
       currency_id: 1,
     });
+    toast(response.data.success);
     add_funds.close();
     getWallets();
   } catch (err) {
-    // add validation errors
-    console.log("failure");
-    console.log(err);
-    // error.value = err;
+    if (err.status === 422) {
+      validation.value = err.validation;
+    }
   }
 }
 
@@ -55,7 +58,8 @@ getWallets();
           <h3 class="pb-4 text-lg font-bold">
             Adicionar fundos à sua carteira
           </h3>
-          <CurrencyInput v-model="quantity" :options="{ currency: 'BRL', precision: 2 }" />
+          <CurrencyInput v-model="quantity" :options="{ currency: 'BRL', precision: 2, valueRange: { min: 0.01 } }" />
+          <div class="mt-2 text-xs text-error">{{ validation.quantity }}</div>
           <div class="py-4">
             <button class="btn btn-sm btn-success" @click.prevent="addFunds">
               Enviar

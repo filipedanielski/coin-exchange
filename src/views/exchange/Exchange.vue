@@ -10,6 +10,7 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue";
+import { toast } from 'vue3-toastify';
 
 const quantity = ref(50);
 const price = ref(0.0);
@@ -21,6 +22,7 @@ const localCurrency = ref({
 });
 const foreignCurrencies = ref([]);
 const selectedCurrency = ref({});
+const validation = ref([]);
 
 async function getForeignCurrencies() {
   const response = await axios.get("http://localhost/api/exchange/currencies");
@@ -42,18 +44,21 @@ function getFee() {
 
 async function exchange() {
   try {
-    await axios.post("http://localhost/api/exchange/transaction", {
+    validation.value = [];
+    const response = await axios.post("http://localhost/api/exchange/transaction", {
       quantity: quantity.value,
       from: localCurrency.value.code,
       to: selectedCurrency.value.code,
     });
+    toast(response.data.success);
     confirm_exchange.close();
     router.push({ name: "wallet" });
   } catch (err) {
-    // add validation errors
-    console.log("failure");
-    console.log(err);
-    // error.value = err;
+    if (err.status === 422) {
+      validation.value = err.validation;
+    } else {
+      toast(err.message);
+    }
   }
 }
 
