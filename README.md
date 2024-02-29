@@ -1,6 +1,8 @@
 # Coin Exchange
 
-Aplicação construída em Vue.js
+Aplicação teste na forma de um Sistema de Compra de Moedas, construída em [Vue.js 3](https://vuejs.org/).
+
+Esta aplicação foi criada para consumir a [API que construí em Laravel](https://github.com/filipedanielski/coin-exchange-api).
 
 ## Instruções de instalação para desenvolvimento local
 
