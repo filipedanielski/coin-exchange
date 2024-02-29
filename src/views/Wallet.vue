@@ -14,7 +14,7 @@ const fallback = ref({
 const validation = ref([]);
 
 async function getWallets() {
-  const response = await axios.get("http://localhost/api/wallet");
+  const response = await axios.get("/api/wallet");
   wallets.value = response.data.map((wallet) => {
     return { quantity: wallet.quantity, currency: wallet.currency };
   });
@@ -23,7 +23,7 @@ async function getWallets() {
 async function addFunds() {
   try {
     validation.value = [];
-    const response = await axios.post("http://localhost/api/wallet", {
+    const response = await axios.post("/api/wallet", {
       quantity: quantity.value,
       currency_id: 1,
     });

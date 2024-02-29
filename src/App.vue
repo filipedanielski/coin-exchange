@@ -7,7 +7,7 @@ import Nav from "@/components/Nav.vue";
 const user = ref("");
 
 async function getUser() {
-  const response = await axios.get("http://localhost/api/user");
+  const response = await axios.get("/api/user");
   user.value = response.data.name;
 }
 

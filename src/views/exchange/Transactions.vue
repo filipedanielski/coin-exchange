@@ -6,7 +6,7 @@ import { ref } from "vue";
 const transactions = ref([]);
 
 async function getTransactions() {
-  const response = await axios.get("http://localhost/api/exchange/transaction");
+  const response = await axios.get("/api/exchange/transaction");
   transactions.value = response.data.map((transaction) => {
     return transaction;
   });

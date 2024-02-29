@@ -25,7 +25,7 @@ const selectedCurrency = ref({});
 const validation = ref([]);
 
 async function getForeignCurrencies() {
-  const response = await axios.get("http://localhost/api/exchange/currencies");
+  const response = await axios.get("/api/exchange/currencies");
   foreignCurrencies.value = response.data;
   selectedCurrency.value = foreignCurrencies.value[0];
   getPrice();
@@ -33,7 +33,7 @@ async function getForeignCurrencies() {
 
 async function getPrice() {
   const response = await axios.get(
-    `http://localhost/api/exchange/price?from=${localCurrency.value.code}&to=${selectedCurrency.value.code}`
+    `/api/exchange/price?from=${localCurrency.value.code}&to=${selectedCurrency.value.code}`
   );
   price.value = response.data;
 }
@@ -45,7 +45,7 @@ function getFee() {
 async function exchange() {
   try {
     validation.value = [];
-    const response = await axios.post("http://localhost/api/exchange/transaction", {
+    const response = await axios.post("/api/exchange/transaction", {
       quantity: quantity.value,
       from: localCurrency.value.code,
       to: selectedCurrency.value.code,
